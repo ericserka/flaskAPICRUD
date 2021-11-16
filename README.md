@@ -2,7 +2,7 @@
 
 ## Pré-requisitos
 
-Instalar os pacotes necessários: pip install -r requirements.txt
+Instalar os pacotes necessários: ```pip install -r requirements.txt```
 
 ## Uso
 
