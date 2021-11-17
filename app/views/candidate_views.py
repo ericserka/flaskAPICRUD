@@ -1,15 +1,16 @@
-from app import app
+from app import app, db
 from sqlalchemy import desc
 from sqlalchemy.sql.expression import func
 import json
 from flask import Response, request
-from app.serializer import serialize
-from app.models import db, Candidate
+from app.utils.serializer import serialize
+from app.models import Candidate
+from app.services.candidate import getAllCandidatesObject
 from datetime import datetime
 
 @app.get("/candidatos")
 def getAllCandidates():
-    results = db.session.query(Candidate).filter(func.length(Candidate.cpf)==11)
+    results = getAllCandidatesObject(db, Candidate)
     retorno=[serialize(r) for r in results]
     return Response(json.dumps(retorno, indent=4, sort_keys=True, default=str),mimetype='application/json')
 

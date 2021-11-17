@@ -1,14 +1,14 @@
-from app import app
-from sqlalchemy import desc
+from app import app, db
 import json
 from flask import Response, request
-from app.serializer import serialize
-from app.models import db, Alert
+from app.utils.serializer import serialize
+from app.models import Alert
+from app.services.alert import getAllAlertsObject
 from datetime import datetime
 
 @app.get("/alertas")
 def getAllAlerts():
-    results = db.session.query(Alert).order_by(desc(Alert.id)).all()
+    results = getAllAlertsObject(db, Alert)
     retorno=[serialize(r) for r in results]
     return Response(json.dumps(retorno, indent=4, sort_keys=True, default=str),mimetype='application/json')
 
