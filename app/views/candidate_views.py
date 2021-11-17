@@ -1,6 +1,4 @@
 from app import app, db
-from sqlalchemy import desc
-from sqlalchemy.sql.expression import func
 import json
 from flask import Response, request
 from app.utils.serializer import serialize
