@@ -1,8 +1,10 @@
 from sqlalchemy.orm import class_mapper
 
-#Transforms a model into a dictionary which can be dumped to JSON.
-def serialize(model):
-    # first we get the names of all the columns on your model
-    columns = [c.key for c in class_mapper(model.__class__).columns]
-    # then we return their values in a dict
-    return dict((c, getattr(model, c)) for c in columns)
+def serialize(model, fields=[]):
+    # return dict with all fields
+    if fields == []:
+        columns = [c.key for c in class_mapper(model.__class__).columns]
+        return dict((c, getattr(model, c) ) for c in columns)
+    # return dict with specified fields
+    else:
+        return dict((f, getattr(model, f) ) for f in fields)
