@@ -17,4 +17,4 @@ app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql://{database_user}:{database_password}@{database_host}/{database_name}"
 db = SQLAlchemy(app)
-from app.views import alert_views, candidate_views
+from app.views import noticia, pessoa
